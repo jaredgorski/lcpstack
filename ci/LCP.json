@@ -1,0 +1,54 @@
+{
+    "kind": "StatefulSet",
+    "id": "ci",
+    "image": "liferaycloud/jenkins:2.176.1-3.1.1",
+    "deploy": false,
+    "memory": 8192,
+    "cpu": 4,
+    "volumes": {
+      "ciData2": "/var/jenkins_test"
+    },
+    "loadBalancer": {
+      "targetPort": 8080
+    },
+    "readinessProbe": {
+      "httpGet": {
+        "path": "/login",
+        "port": 8080
+      },
+      "initialDelaySeconds": 60,
+      "timeoutSeconds": 10,
+      "failureThreshold": 12
+    },
+    "livenessProbe": {
+      "httpGet": {
+        "path": "/login",
+        "port": 8080
+      },
+      "initialDelaySeconds": 300,
+      "timeoutSeconds": 10,
+      "failureThreshold": 12
+    },
+    "env": {
+      "DXPCLOUD_PROJECT_NAME": "qadxpclientsh",
+
+      "JENKINS_URL": "https://ci-qadxpclientsh-infra.lfr.sh",
+
+      "JENKINS_ADMIN_USER_NAME": "qadxpclientsh",
+      "JENKINS_ADMIN_EMAIL": "qadxpclientsh@liferay.com",
+
+      "JENKINS_CUSTOMER_USER_NAME": "customer",
+      "JENKINS_CUSTOMER_PASSWORD": "Wa0JeFZnLs1TPGW1JkUUUGVuDreOOS",
+
+      "JENKINS_EMAIL_NOTIFICATIONS_FROM": "Jenkins CI - qadxpclientsh <qadxpclientsh@liferay.com>",
+
+      "LCP_REMOTE": "liferay.sh",
+
+      "GITHUB_REPOSITORY": "dxpcloud/qadxpclientsh"
+    },
+    "environments": {
+      "infra": {
+        "deploy": true
+      }
+    }
+  }
