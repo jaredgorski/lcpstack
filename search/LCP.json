@@ -1,7 +1,7 @@
 {
   "kind":"StatefulSet",
   "id": "search",
-  "image": "liferaycloud/elasticsearch:6.1.4-3.0.4",
+  "image": "liferaycloud/elasticsearch:6.8.6-3.0.8",
   "cpu": 8,
   "memory": 8192,
   "ports": [
